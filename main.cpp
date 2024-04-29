@@ -167,6 +167,8 @@ int main() {
         //pathX = pathEmpty;
         //pathY = pathEmpty;
     }
+
+    // 输出矩阵点集, 目前格式 mathematica 的 listPlot3D
     for (int i = 0; i < 400; ++i) {
         for (int j = 0; j < 200; ++j) {
             //if (XY_Map.coeffRef(i, j) != 0)
