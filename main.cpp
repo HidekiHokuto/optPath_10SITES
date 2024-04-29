@@ -69,7 +69,7 @@ int main() {
 
 
 
-    double timeStep = 1;
+    double timeStep = 0.0005;
 
 
     for (int antNo = 0; antNo < 1; ++antNo) {
