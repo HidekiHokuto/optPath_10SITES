@@ -72,7 +72,7 @@ int main() {
     double timeStep = 0.0005;
 
 
-    for (int antNo = 0; antNo < 1; ++antNo) {
+    for (int antNo = 0; antNo < 20; ++antNo) {
 
         // 单只蚂蚁
         double t = 0;
@@ -81,6 +81,8 @@ int main() {
         vector<int> pathX;
         vector<int> pathY;
         // vector<int> pathEmpty;
+
+        // TODO 初始状态指定
 
         while (hz > 0 && t < 1900) {
             {
@@ -95,10 +97,19 @@ int main() {
 
                 //t += h;
             }
+
             if (t > 1900)
                 break;
+            if (hz < 0.001)
+                break;
+
+
+            // TODO 进行状态演化, 龙格库塔算法
+
+
+
             // 随机选择三个 hz 点////////////////////////////////////////
-            int randomMin = 2, randomMax = 3;
+            int randomMin = 4, randomMax = 10;
             random_device seed;
             ranlux48 engine(seed());
             uniform_int_distribution<> distrib(randomMin, randomMax);
@@ -154,6 +165,8 @@ int main() {
                 PosY = PosY3;
             }
 
+
+
 /*
             int pointMax(int PosX, int PosY1, int PosY2, int PosY3, Eigen::SparseMatrix<int, Eigen::RowMajor> * Map) {
 
@@ -193,7 +206,7 @@ int main() {
 
             // 如果下一点并没有在当前路径中, 加入到 vector 中, 否则的话忽略.
 
-            if (pathX.empty() || (*(pathX.end()) != PosX || *(pathY.end()) != PosY)) {
+            if (pathX.empty() || (*(pathX.end()-1) != PosX || *(pathY.end()-1) != PosY)) {
                 pathX.push_back(PosX);
                 pathY.push_back(PosY);
             }
@@ -203,7 +216,11 @@ int main() {
 
 
         }
-        //cout << "?" << endl;
+        for (int i = 0; i < 100; ++i) {
+            //cout << pathX[i] << "\t" << pathY[i] << "\t" << endl;
+        }
+        // 一只蚂蚁的时间演化结束
+        // TODO 计算最终状态的能量期待值
         // update 到 map 矩阵中
 
         for (int i = 0; i < pathX.size(); ++i) {
@@ -222,9 +239,14 @@ int main() {
         for (int j = 0; j < 200; ++j) {
             //if (XY_Map.coeffRef(i, j) != 0)
             if (XY_Map.coeffRef(i,j) != 0) {
-                cout << "{" << i << ", " << j << ", " << XY_Map.coeffRef(i, j) << "}, ";
+                // Mathematica listPlot3D
+                //cout << "{" << i << ", " << j << ", " << XY_Map.coeffRef(i, j) << "}, ";
+
+                // Gnuplot
+                cout << i << "\t" << j << "\t" << XY_Map.coeffRef(i,j) << endl;
             }
         }
+        cout << endl;
     }
 
     return 0;
