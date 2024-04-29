@@ -47,7 +47,8 @@ int main() {
 
                 //t += h;
             }
-
+            if (t > 1900)
+                break;
             // 随机选择三个 hz 点////////////////////////////////////////
             int randomMin = 2, randomMax = 3;
             random_device seed;
