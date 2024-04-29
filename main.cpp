@@ -82,7 +82,19 @@ int main() {
         vector<int> pathY;
         // vector<int> pathEmpty;
 
-        // TODO 初始状态指定
+        //----------------------------------------
+        // TODO 初始状态指定, |1,0,0,...>
+        Eigen::SparseMatrix<std::complex<double>,Eigen::RowMajor> state(1024, 1);
+        for (int i = 0; i < 1024; ++i) {
+            //state.coeffRef(i, 0) = 1.0 / sqrt(1024.0);
+
+            if (i == 0) {
+                state.coeffRef(i, 0) = 1;
+            } else {
+                state.coeffRef(i, 0) = 0;
+            }
+        }
+        //----------------------------------------
 
         while (hz > 0 && t < 1900) {
             {
