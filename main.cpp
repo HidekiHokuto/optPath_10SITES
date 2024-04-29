@@ -72,7 +72,7 @@ int main() {
     double timeStep = 0.0005;
 
 
-    for (int antNo = 0; antNo < 20; ++antNo) {
+    for (int antNo = 0; antNo < 1; ++antNo) {
 
         // 单只蚂蚁
         double t = 0;
@@ -94,6 +94,15 @@ int main() {
                 state.coeffRef(i, 0) = 0;
             }
         }
+        complex<double> I(0,1);
+
+        Eigen::SparseMatrix<std::complex<double>,Eigen::RowMajor> Hamiltonian = pureKitaevHam + hz * H_mag_Matrix;
+        Eigen::SparseMatrix<std::complex<double>,Eigen::RowMajor> K1;
+        Eigen::SparseMatrix<std::complex<double>,Eigen::RowMajor> K2;
+        Eigen::SparseMatrix<std::complex<double>,Eigen::RowMajor> K3;
+        Eigen::SparseMatrix<std::complex<double>,Eigen::RowMajor> K4;
+
+
         //----------------------------------------
 
         while (hz > 0 && t < 1900) {
@@ -117,6 +126,14 @@ int main() {
 
 
             // TODO 进行状态演化, 龙格库塔算法
+            Hamiltonian = pureKitaevHam + hz * H_mag_Matrix;
+            K1 = -I * Hamiltonian * state;
+            K2 = -I * Hamiltonian * (state + timeStep / 2 * K1);
+            K3 = -I * Hamiltonian * (state + timeStep / 2 * K2);
+            K4 = -I * Hamiltonian * (state + timeStep * K3);
+
+            state = state + timeStep / 6 * (K1 + 2 * K2 + 2 * K3 + K4);
+
 
 
 
@@ -233,6 +250,10 @@ int main() {
         }
         // 一只蚂蚁的时间演化结束
         // TODO 计算最终状态的能量期待值
+        auto finalE = state.adjoint() * Hamiltonian * state;
+
+        cout << "finalE\n";
+        cout << finalE;
         // update 到 map 矩阵中
 
         for (int i = 0; i < pathX.size(); ++i) {
