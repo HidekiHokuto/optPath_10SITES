@@ -8,6 +8,8 @@
 #include <cstdio>
 #include <random>
 
+// test
+ 
 using namespace std;
 
 string d2b(int dec) {
