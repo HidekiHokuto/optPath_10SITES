@@ -8,7 +8,7 @@
 #include <cstdio>
 #include <random>
 
-// test
+// compile with icpx on Linux.
  
 using namespace std;
 
