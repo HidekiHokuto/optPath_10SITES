@@ -8,6 +8,8 @@
 #include <cstdio>
 #include <random>
 
+// compile with icpx on Linux.
+ 
 using namespace std;
 
 string d2b(int dec) {
