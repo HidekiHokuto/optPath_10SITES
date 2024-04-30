@@ -70,7 +70,11 @@ int main() {
     Eigen::SparseMatrix<int,Eigen::RowMajor> XY_Map(400, 200);
 	for (int i = 0; i < 400; ++i) {
 		// calculate j
-
+		double j = 0;
+		j = static_cast<int>(200 * exp(-0.025 * i * 2.5));
+		if (j == 200)
+			j = 199;
+		XY_Map.coeffRef(i,j) += 1;
 	}
 	
 
@@ -79,10 +83,10 @@ int main() {
 
 
     double timeStep = 0.0005;
-	timeStep = 0.01;
+	// timeStep = 0.01;
 
 
-    for (int antNo = 0; antNo < 1; ++antNo) {
+    for (int antNo = 0; antNo < 0; ++antNo) {
 
         // 单只蚂蚁
         double t = 0;
