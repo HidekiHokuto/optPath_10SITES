@@ -1,4 +1,3 @@
-#define EIGEN_USE_MKL_ALL
 #include <iostream>
 #include <vector>
 #include <string>
@@ -264,9 +263,12 @@ int main() {
         }
         // 一只蚂蚁的时间演化结束
         // 计算最终状态的能量期待值, 取实部
-        auto finalE = (state.adjoint() * Hamiltonian * state).real();
+        // double finalE = static_cast<double>((state.adjoint() * Hamiltonian * state).real());
+		auto finalE = (state.adjoint() * Hamiltonian * state).norm();
+		cout << finalE;
+		//cout << finalE.coeffRef(0,0) << endl;
 
-        // cout << "finalE\n";
+		// cout << "finalE\n";
         // cout << finalE;
 
         // update 到 map 矩阵中
@@ -291,10 +293,10 @@ int main() {
                 //cout << "{" << i << ", " << j << ", " << XY_Map.coeffRef(i, j) << "}, ";
 
                 // Gnuplot
-                cout << i << "\t" << j << "\t" << XY_Map.coeffRef(i,j) << endl;
+               // cout << i << "\t" << j << "\t" << XY_Map.coeffRef(i,j) << endl;
             }
         }
-        cout << endl;
+        //cout << endl;
     }
 
     return 0;
