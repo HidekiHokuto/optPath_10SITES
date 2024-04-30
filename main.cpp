@@ -82,10 +82,10 @@ int main() {
 
 
     double timeStep = 0.0005;
-	// timeStep = 0.01;
+	timeStep = 1;
 
 
-    for (int antNo = 0; antNo < 0; ++antNo) {
+    for (int antNo = 0; antNo < 1; ++antNo) {
 
         // 单只蚂蚁
         double t = 0;
@@ -98,15 +98,20 @@ int main() {
         //----------------------------------------
         // 初始状态指定, |1,0,0,...>
         Eigen::SparseMatrix<std::complex<double>,Eigen::RowMajor> state(1024, 1);
-        for (int i = 0; i < 1024; ++i) {
+		//Eigen::VectorXd state(1024);
+		//state(0) = 1;
+		cout << state << endl;
+
+		for (int i = 0; i < 1024; ++i) {
             //state.coeffRef(i, 0) = 1.0 / sqrt(1024.0);
 
             if (i == 0) {
-                state.coeffRef(i, 0) = 1;
+                state.coeffRef(i, 0) = 1.0;
             } else {
                 state.coeffRef(i, 0) = 0;
             }
         }
+		
         complex<double> I(0,1);
 
         Eigen::SparseMatrix<std::complex<double>,Eigen::RowMajor> Hamiltonian = pureKitaevHam + hz * H_mag_Matrix;
@@ -245,7 +250,7 @@ int main() {
              */
             //cout << hz << endl;
             t += timeStep;
-
+			// cout << (state.adjoint() * Hamiltonian * state).real();
             // 如果下一点并没有在当前路径中, 加入到 vector 中, 否则的话忽略.
 
             if (pathX.empty() || (*(pathX.end()-1) != PosX || *(pathY.end()-1) != PosY)) {
@@ -264,8 +269,8 @@ int main() {
         // 一只蚂蚁的时间演化结束
         // 计算最终状态的能量期待值, 取实部
         // double finalE = static_cast<double>((state.adjoint() * Hamiltonian * state).real());
-		auto finalE = (state.adjoint() * Hamiltonian * state).norm();
-		cout << finalE;
+		auto finalE = (state.adjoint() * Hamiltonian * state).real();
+		//cout << finalE << endl;
 		//cout << finalE.coeffRef(0,0) << endl;
 
 		// cout << "finalE\n";
