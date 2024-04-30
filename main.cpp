@@ -249,13 +249,14 @@ int main() {
             //cout << pathX[i] << "\t" << pathY[i] << "\t" << endl;
         }
         // 一只蚂蚁的时间演化结束
-        // TODO 计算最终状态的能量期待值
-        auto finalE = state.adjoint() * Hamiltonian * state;
+        // 计算最终状态的能量期待值, 取实部
+        auto finalE = (state.adjoint() * Hamiltonian * state).real();
 
-        cout << "finalE\n";
-        cout << finalE;
+        // cout << "finalE\n";
+        // cout << finalE;
+
         // update 到 map 矩阵中
-
+        // TODO 根据能量期待值赋分
         for (int i = 0; i < pathX.size(); ++i) {
             XY_Map.coeffRef(pathX[i], pathY[i]) += 1;
         }
