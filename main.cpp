@@ -4,7 +4,7 @@
 #include <cmath>
 #include <complex>
 #include <iomanip>
-#include <Eigen>
+#include "eigen-3.4.0/Eigen/Eigen"
 #include <cstdio>
 #include <random>
 
@@ -70,6 +70,7 @@ int main() {
 
 
     double timeStep = 0.0005;
+	timeStep = 0.1;
 
 
     for (int antNo = 0; antNo < 1; ++antNo) {
