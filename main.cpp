@@ -1,3 +1,4 @@
+#define EIGEN_USE_MKL_ALL
 #include <iostream>
 #include <vector>
 #include <string>
@@ -78,7 +79,7 @@ int main() {
 
 
     double timeStep = 0.0005;
-	//timeStep = 0.1;
+	timeStep = 0.01;
 
 
     for (int antNo = 0; antNo < 1; ++antNo) {
