@@ -160,15 +160,15 @@ int main() {
                 //t += h;
             }
 
-<<<<<<< HEAD
+
             // if (t > 1000)
                // break;
             if (hz < 0.001)
-=======
+
             if (t > 1000)
                 break;
             if (hz < 0.0001)
->>>>>>> 8e077c0e0638f3acb19ad3166245bc47fdf696d8
+
                 break;
 
 
@@ -181,13 +181,13 @@ int main() {
 
             state = state + timeStep / 6 * (K1 + 2 * K2 + 2 * K3 + K4);
 
-<<<<<<< HEAD
+
             //cout << K1 << endl;
-=======
+
 
 
             // cout << K1 << endl;
->>>>>>> 8e077c0e0638f3acb19ad3166245bc47fdf696d8
+
             //break;
 
 
