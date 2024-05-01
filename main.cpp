@@ -101,10 +101,10 @@ int main() {
 
 
     double timeStep = 0.0005;
-	timeStep = 0.5;
+	// timeStep = 0.5;
 
 
-    for (int antNo = 0; antNo < 1; ++antNo) {
+    for (int antNo = 0; antNo < 10; ++antNo) {
 
         // 单只蚂蚁
         double t = 0;
@@ -194,7 +194,7 @@ int main() {
 
 
             // 随机选择三个 hz 点////////////////////////////////////////
-            int randomMin = 0, randomMax = 2;
+            int randomMin = 2, randomMax = 4;
             random_device seed;
             ranlux48 engine(seed());
             uniform_int_distribution<> distrib(randomMin, randomMax);
@@ -305,15 +305,13 @@ int main() {
             //cout << pathX[i] << "\t" << pathY[i] << "\t" << endl;
         }
         // 一只蚂蚁的时间演化结束
+		//
+		//
+		// 
         // 计算最终状态的能量期待值, 取实部
         // double finalE = static_cast<double>((state.adjoint() * Hamiltonian * state).real());
 		auto finalE = (state.adjoint() * Hamiltonian * state);
-        // cout << finalE;
-		//cout << finalE << "fuck you" << endl;
-		//cout << finalE.coeffRef(0,0) << endl;
-
-		// cout << "finalE\n";
-        // cout << finalE;
+        cout << finalE.real() << endl;
 
         // update 到 map 矩阵中
         // TODO 根据能量期待值赋分
