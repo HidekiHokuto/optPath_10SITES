@@ -310,7 +310,8 @@ int main() {
         // double finalE = static_cast<double>((state.adjoint() * Hamiltonian * state).real());
 		auto finalE = (state.adjoint() * Hamiltonian * state);
         // cout << finalE.real() << endl;
-		double doubleE = finalE.real();
+		cout << finalE.trace() << endl;
+
 
         // update 到 map 矩阵中
         // TODO 根据能量期待值赋分
