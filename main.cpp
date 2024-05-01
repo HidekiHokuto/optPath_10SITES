@@ -104,7 +104,7 @@ int main() {
 	// timeStep = 0.5;
 
 
-    for (int antNo = 0; antNo < 10; ++antNo) {
+    for (int antNo = 0; antNo < 1; ++antNo) {
 
         // 单只蚂蚁
         double t = 0;
