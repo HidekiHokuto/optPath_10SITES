@@ -112,7 +112,7 @@ int main() {
 
         vector<int> pathX;
         vector<int> pathY;
-        // vector<int> pathEmpty;
+        vector<int> pathEmpty;
 		
 
 
@@ -163,12 +163,10 @@ int main() {
 
             // if (t > 1000)
                // break;
-            if (hz < 0.001)
 
             if (t > 1000)
                 break;
             if (hz < 0.0001)
-
                 break;
 
 
@@ -194,7 +192,7 @@ int main() {
 
 
             // 随机选择三个 hz 点////////////////////////////////////////
-            int randomMin = 2, randomMax = 4;
+            int randomMin = 3, randomMax = 4;
             random_device seed;
             ranlux48 engine(seed());
             uniform_int_distribution<> distrib(randomMin, randomMax);
@@ -311,7 +309,8 @@ int main() {
         // 计算最终状态的能量期待值, 取实部
         // double finalE = static_cast<double>((state.adjoint() * Hamiltonian * state).real());
 		auto finalE = (state.adjoint() * Hamiltonian * state);
-        cout << finalE.real() << endl;
+        // cout << finalE.real() << endl;
+		double doubleE = finalE.real();
 
         // update 到 map 矩阵中
         // TODO 根据能量期待值赋分
@@ -319,11 +318,13 @@ int main() {
             XY_Map.coeffRef(pathX[i], pathY[i]) += 1;
         }
 
-
+		for (auto i : pathY) {
+		//	cout << i << endl;
+		}
 
         // 清空当前 path
-        //pathX = pathEmpty;
-        //pathY = pathEmpty;
+        pathX = pathEmpty;
+        pathY = pathEmpty;
 
 
     } // 单只蚂蚁结束
@@ -340,7 +341,7 @@ int main() {
                 cout << i << "\t" << j << "\t" << XY_Map.coeffRef(i,j) << endl;
             }
         }
-        //cout << endl;
+        cout << endl;
     }
 
     return 0;
