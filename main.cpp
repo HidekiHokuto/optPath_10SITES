@@ -95,6 +95,8 @@ int main() {
         vector<int> pathX;
         vector<int> pathY;
         // vector<int> pathEmpty;
+		
+
 
         //----------------------------------------
         // 初始状态指定, |1,0,0,...>
@@ -140,8 +142,8 @@ int main() {
                 //t += h;
             }
 
-            if (t > 1000)
-                break;
+            // if (t > 1000)
+               // break;
             if (hz < 0.001)
                 break;
 
@@ -155,8 +157,8 @@ int main() {
 
             state = state + timeStep / 6 * (K1 + 2 * K2 + 2 * K3 + K4);
 
-            cout << K1 << endl;
-            break;
+            //cout << K1 << endl;
+            //break;
 
 
 
