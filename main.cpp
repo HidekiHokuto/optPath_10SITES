@@ -310,7 +310,7 @@ int main() {
         // double finalE = static_cast<double>((state.adjoint() * Hamiltonian * state).real());
 		auto finalE = (state.adjoint() * Hamiltonian * state);
         // cout << finalE.real() << endl;
-		cout << finalE.trace() << endl;
+		cout << finalE.sum() << endl;
 
 
         // update 到 map 矩阵中
