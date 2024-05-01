@@ -308,16 +308,16 @@ int main() {
 		// 
         // 计算最终状态的能量期待值, 取实部
         // double finalE = static_cast<double>((state.adjoint() * Hamiltonian * state).real());
-		auto finalE = (state.adjoint() * Hamiltonian * state);
-        // cout << finalE.real() << endl;
+		double finalE = (state.adjoint() * Hamiltonian * state).sum().real();
+		//double doubleE = finalE.real();
 		//cout << finalE.sum() << endl;
-		double dddd = finalE.sum().real();
-		cout << dddd;
+		//double dddd = finalE.sum().real();
+		//cout << dddd;
 
         // update 到 map 矩阵中
         // TODO 根据能量期待值赋分
         for (int i = 0; i < pathX.size(); ++i) {
-            XY_Map.coeffRef(pathX[i], pathY[i]) += 1;
+            XY_Map.coeffRef(pathX[i], pathY[i]) += 10 - 10*fabs(finalE - energyGS);
         }
 
 		for (auto i : pathY) {
